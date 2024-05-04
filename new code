@@ -1,0 +1,9 @@
+function doGet(e) {
+  return HtmlService.createHtmlOutputFromFile("Index");
+}
+
+function getSheetData() { 
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Newest Data'); 
+  var dataRange = sheet.getDataRange();
+  return dataRange.getValues();  
+}
