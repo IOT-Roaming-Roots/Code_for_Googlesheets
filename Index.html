@@ -3,17 +3,23 @@
   <head>
     <base target="_top">
     <style>
-      /* CSS to specify image size */
       .image-size {
-        width: 100px; /* Specify the width */
-        height: auto; /* Automatically adjust height to maintain aspect ratio */
-      }
-            /* CSS to specify font size for table cells */
-      #data-table td {
-        font-size: 30px; /* Adjust the font size as needed */
+        width: 100px;
+        height: auto;
       }
 
+      #data-table td {
+        font-size: 30px;
+      }
     </style>
+  </head>
+  <body>
+    <center><br>
+      <h1>Roaming Roots Plant Monitor</h1>
+      <table id="data-table">
+      </table>
+    </center>
+
     <script>
       function fetchData() {
         google.script.run.withSuccessHandler(updateTable).getSheetData();
@@ -28,43 +34,33 @@
           var cell2 = row.insertCell(1);
           var cell3 = row.insertCell(2);
           
-          // Add image element with a different source for each row
           var imageSrc = "";
           switch(i) {
             case 0:
               imageSrc = "https://static.thenounproject.com/png/3652140-200.png";
               break;
             case 1:
-              imageSrc = "data:image/png;base64,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";
+              imageSrc = "https://static.vecteezy.com/system/resources/thumbnails/007/139/826/small/temperature-thermometer-icon-free-vector.jpg";
               break;
             case 2:
               imageSrc = "https://media.istockphoto.com/id/1069450406/vector/light-bulb-line-icon-vector-isolated-on-white-background-flat-style-for-graphic-design.jpg?s=612x612&w=0&k=20&c=guqoNUouaD4D5zxmhT5u20KEhF2X9eeqcWJX0vd77ls=";
               break;
+            case 3:
+              imageSrc = "https://media1.thehungryjpeg.com/thumbs2/ori_3942996_q6csbtstkz8qvn5nkjaz2yszgm80kjbebwhithas_clock-time-icon-simple-black-style.jpg";
+              break;
             default:
               imageSrc = "default_image.jpg";
           }
-          // Add CSS class to the image for styling
           cell1.innerHTML = '<img src="' + imageSrc + '" alt="Image" class="image-size">';
-          
-          // Add the data in the second cell
           cell2.innerHTML = tableData[i][0];
-          
-          // Add the data in the third cell
           cell3.innerHTML = tableData[i][1];
         }
       }
 
       window.onload = function() {
         fetchData();
-        setInterval(fetchData, 1000); // Refresh every 1 seconds
+        setInterval(fetchData, 1000); // Refresh every 1 second
       };
     </script>
-  </head>
-  <body>
-    <center><br>
-      <h2>Display Google Sheet data on webpage</h2>
-      <table id="data-table">
-      </table>
-    </center>
   </body>
 </html>
