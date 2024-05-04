@@ -1,0 +1,18 @@
+function sendDataToSecondSheet(data) {
+  var sourceUrl = "https://docs.google.com/spreadsheets/d/1D9rO6IeVTcPttW5sXHDQ1v6STKt9yli-9NiZaVActMc/edit#gid=0"; // Replace SOURCE_SHEET_URL with the URL of your first spreadsheet
+  var destinationUrl = "https://docs.google.com/spreadsheets/d/1D9rO6IeVTcPttW5sXHDQ1v6STKt9yli-9NiZaVActMc/edit#gid=1843729170"; // Replace DESTINATION_SHEET_URL with the URL of your second spreadsheet
+  
+  var sourceSheet = SpreadsheetApp.openByUrl(sourceUrl).getSheetByName("Data");
+  var destinationSheet = SpreadsheetApp.openByUrl(destinationUrl).getSheetByName("Newest Data");
+  
+  var lastRow = sourceSheet.getLastRow();
+  var data = sourceSheet.getRange(lastRow, 1, 1, 4).getValues()[0];
+  
+  var dateTime = new Date(data[0]);
+  var formattedDateTime = dateTime.toLocaleString();
+
+  destinationSheet.getRange("B4").setValue(formattedDateTime); // Date and time from column A to B1 on the second sheet
+  destinationSheet.getRange("B1").setValue(data[1]); // Moisture from column B to B2 on the second sheet
+  destinationSheet.getRange("B3").setValue(data[2]); // Temperature from column C to B3 on the second sheet
+  destinationSheet.getRange("B2").setValue(data[3]); // Light level from column D to B4 on the second sheet
+}
